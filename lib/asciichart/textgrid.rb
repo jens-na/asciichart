@@ -2,21 +2,7 @@ module Asciichart
   class Textgrid
 
     attr_reader :width, :height
-    attr_reader :grid
-
-    POINT_ARROWS = { 
-      :north => ['^'],
-      :south => ['v', 'V'],
-      :west => ['<'],
-      :east => ['>']
-    }
-
-    POINT_LINES = {
-      :horizontal => ['-'],
-      :vertical => ['|']
-    }
-
-    POINT_START = [ '+', '|' ]
+    attr_reader :input, :grid
 
     # Initialize a new Chart with the given input
     #
@@ -26,7 +12,7 @@ module Asciichart
     def initialize(input)
       @width = calc_width(input)
       @height = calc_height(input)
-
+      @input = input.chomp
       parse_input(input)
     end 
 
@@ -36,14 +22,13 @@ module Asciichart
       @grid = Array.new
 
       input.each_line do |line|
-        line.each_char do |char|
+        line.chomp.each_char do |char|
           @grid.push(Textcell.new(x,y))
           x+=1
         end
         x=0
         y+=1
       end
-
     end
 
     # Checks if a cell exists in the current grid
@@ -63,6 +48,20 @@ module Asciichart
         end
       end
       exists
+    end
+
+    # Returns the textual represenation of the cell in the
+    # grid, also checks if the cell is available
+    #
+    # cell - the cell with the corresponding (x,y) pair
+    #
+    # Returns the text or nil if cell does not exist
+    def get_char(cell)
+      ch = nil
+      if cell.y < @input.lines.length
+        line = @input.lines[cell.y]
+        ch = line[cell.x]
+      end
     end
 
     # Calculates the width. The width is the length of the line with
