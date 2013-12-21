@@ -18,8 +18,8 @@ INPUT
       end
 
       should "have correct dimensions" do
-        assert_equal @grid.width, 35
-        assert_equal @grid.height, 4 
+        assert_equal @grid.maxwidth, 35
+        assert_equal @grid.maxheight, 4 
       end
     end
 

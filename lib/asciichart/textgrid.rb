@@ -1,7 +1,7 @@
 module Asciichart
   class Textgrid
 
-    attr_reader :width, :height
+    attr_reader :maxwidth, :maxheight
     attr_reader :input, :grid
 
     # Initialize a new Chart with the given input
@@ -10,12 +10,16 @@ module Asciichart
     #
     # Returns the new chart
     def initialize(input)
-      @width = calc_width(input)
-      @height = calc_height(input)
+      @maxwidth = calc_maxwidth(input)
+      @maxheight = calc_maxheight(input)
       @input = input.chomp
       parse_input(input)
     end 
 
+    # Parses the input data without the trailing newline
+    # characters.
+    #
+    # input - the input chart
     def parse_input(input)
       x = 0
       y = 0
@@ -58,7 +62,7 @@ module Asciichart
     # Returns the text or nil if cell does not exist
     def get_char(cell)
       ch = nil
-      if cell.y < @input.lines.length
+      if cell.y < @input.lines.count
         line = @input.lines[cell.y]
         ch = line[cell.x]
       end
@@ -70,7 +74,7 @@ module Asciichart
     # input - the input which should be used for calculation
     #
     # Returns the width
-    def calc_width(input)
+    def calc_maxwidth(input)
       width = 0
       input.each_line do |line|
         if width < line.length-1
@@ -85,7 +89,7 @@ module Asciichart
     # input - the input which should be used for calculation
     #
     # Returns the height
-    def calc_height(input)
+    def calc_maxheight(input)
       input.lines.count 
     end
 
