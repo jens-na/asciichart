@@ -14,3 +14,5 @@ end
 
 # internal
 require 'asciichart/chart'
+require 'asciichart/textgrid'
+require 'asciichart/textcell'

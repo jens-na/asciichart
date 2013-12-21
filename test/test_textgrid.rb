@@ -2,9 +2,9 @@ require 'helper'
 
 class TestChart < Test::Unit::TestCase
 
-  context "A chart" do
+  context "A textgrid" do
 
-    context "calculate length and height of chart" do
+    context "calculate length and height of textgrid" do
       setup do
         input = <<INPUT
 +-------------+         +---------+
@@ -12,12 +12,13 @@ class TestChart < Test::Unit::TestCase
 |             |         +---------+
 +-------------+
 INPUT
-        @chart = Chart.new(input)
+        @grid = Textgrid.new(input)
+
       end
 
       should "have correct dimensions" do
-        assert_equal 35, @chart.width
-        assert_equal 4, @chart.height 
+        assert_equal 35, @grid.width
+        assert_equal 4, @grid.height 
       end
     end
   end
