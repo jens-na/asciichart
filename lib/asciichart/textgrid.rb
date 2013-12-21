@@ -40,19 +40,29 @@ module Asciichart
           @grid.push(Textcell.new(x,y))
           x+=1
         end
-        fill_absolute(y)
+        x=0
         y+=1
       end
 
     end
 
-    # Fills the array of text cells to the absolute width if
-    # necessary
+    # Checks if a cell exists in the current grid
     #
-    # y - the line to fill
-    def fill_absolute(y)
+    # cell - the cell with the corresponding (x,y) pair
+    #
+    # Returns true or false
+    def cell_exists?(cell)
+      exists = false
+      for e in @grid
+        x_valid = (e.x == cell.x)
+        y_valid = (e.y == cell.y)
 
-
+        if x_valid && y_valid
+          exists = true
+          break
+        end
+      end
+      exists
     end
 
     # Calculates the width. The width is the length of the line with
