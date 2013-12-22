@@ -1,8 +1,10 @@
 module Sketchdown
   class Textgrid
 
-    attr_reader :maxwidth, :maxheight
-    attr_reader :input, :grid
+    attr_reader :input
+    attr_reader :grid
+    attr_reader :maxwidth
+    attr_reader :maxheight
 
     # Initialize a new Chart with the given input
     #

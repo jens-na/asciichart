@@ -2,7 +2,9 @@ module Sketchdown
 
   class Chart
 
-    attr_reader :renderer, :input, :grid
+    attr_reader :renderer
+    attr_reader :input
+    attr_reader :grid
 
     POINT_ARROWS = { 
       :north => ['^'],

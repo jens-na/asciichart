@@ -2,8 +2,13 @@ module Sketchdown
 
   class Textcell
 
-    attr_reader :x, :y
+    attr_reader :x
+    attr_reader :y
 
+    # Initializes a cell with the corresponding (x,y) pair
+    #
+    # x - the x value, refers to a character in a line
+    # y - the y value, refers to the line no of the input
     def initialize(x,y)
       @x = x
       @y = y
