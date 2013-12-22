@@ -43,6 +43,8 @@ module Sketchdown
     #
     # Returns true or false
     def cell_exists?(cell)
+      return nil if cell == nil
+
       exists = false
       for e in @grid
         x_valid = (e.x == cell.x)
@@ -68,6 +70,63 @@ module Sketchdown
         line = @input.lines[cell.y]
         ch = line[cell.x]
       end
+    end
+
+    # Returns the neighbors of the current cell with is specifally
+    # the northern, southern, western and eastern cell.
+    #
+    # cell - the cell with the corresponding (x,y) pair
+    #
+    # Returns the cells as a hash
+    def get_neighbors(cell)
+      hash = Hash.new
+      north = cell.north
+      south = cell.south
+      west = cell.west
+      east = cell.east
+
+      if cell_exists?(north)
+        hash[:north] = north
+      end
+      if cell_exists?(south)
+        hash[:south] = south
+      end
+      if cell_exists?(west)
+        hash[:west] = west
+      end
+      if cell_exists?(east)
+        hash[:east] = east
+      end
+      hash
+    end
+
+    # Returns all the neghbors of the current cell which is specifically
+    # :north, :south, :west, :east, :north_west, :north_east, :south_west
+    # and :south_east
+    #
+    # cell - the cell with the corresponding (x,y) pair
+    #
+    # Returns the cells as a hash
+    def get_neighbors_all(cell)
+      hash = get_neighbors(cell)
+      north_east = cell.north_east
+      north_west = cell.north_west
+      south_east = cell.south_east
+      south_west = cell.south_west
+
+      if cell_exists?(north_east)
+        hash[:north_east] = north_east
+      end
+      if cell_exists?(north_west)
+        hash[:north_west] = north_west
+      end
+      if cell_exists?(south_west)
+        hash[:south_west] = south_west
+      end
+      if cell_exists?(south_east)
+        hash[:south_east] = south_east
+      end
+      hash
     end
 
     # Calculates the width. The width is the length of the line with

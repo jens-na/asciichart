@@ -55,5 +55,39 @@ INPUT
         assert_equal nil, @ch4
       end  
     end
+
+    context "get neighbors of the current cell" do
+      setup do
+        grid = Textgrid.new(@input)
+        cell = Textcell.new(0,0)
+        cell2 = Textcell.new(24,2)
+        @neighbors = grid.get_neighbors(cell)
+        @neighbors2 = grid.get_neighbors(cell2)
+      end
+
+      should "return east and south cell" do
+        assert_equal 1, @neighbors[:east].x
+        assert_equal 0, @neighbors[:east].y
+
+        assert_equal 0, @neighbors[:south].x
+        assert_equal 1, @neighbors[:south].y
+        
+        assert_equal nil, @neighbors[:west]
+        assert_equal nil, @neighbors[:north]
+      end
+
+      should "return north, east, west cell" do
+        assert_equal 24, @neighbors2[:north].x
+        assert_equal 1, @neighbors2[:north].y
+
+        assert_equal 25, @neighbors2[:east].x
+        assert_equal 2, @neighbors2[:east].y
+
+        assert_equal 23, @neighbors2[:west].x
+        assert_equal 2, @neighbors2[:west].y
+
+        assert_equal nil, @neighbors2[:south]
+      end
+    end
   end
 end

@@ -25,18 +25,25 @@ class TestTextcell < Test::Unit::TestCase
       should "calc coordinates (compass style) correctly" do
         assert_equal 4, @cell_north.y
         assert_equal 5, @cell_north.x
+
         assert_equal 6, @cell_south.y
         assert_equal 5, @cell_south.x
+
         assert_equal 5, @cell_west.y
         assert_equal 4, @cell_west.x
+
         assert_equal 5, @cell_east.y
         assert_equal 6, @cell_east.x
+
         assert_equal 4, @cell_north_east.y
         assert_equal 6, @cell_north_east.x
+
         assert_equal 4, @cell_north_west.y
         assert_equal 4, @cell_north_west.x
+
         assert_equal 6, @cell_south_east.y
         assert_equal 6, @cell_south_east.x
+
         assert_equal 6, @cell_south_west.y
         assert_equal 4, @cell_south_west.x
       end

@@ -1,8 +1,8 @@
 module Sketchdown
 
-  module Parser
+  module Renderer
 
-    class Base
+    class Png < Base
 
     end
   end

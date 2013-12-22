@@ -13,6 +13,8 @@ end
 # stdlib
 
 # internal
-require 'sketchdown/chart'
 require 'sketchdown/textgrid'
 require 'sketchdown/textcell'
+require 'sketchdown/document'
+require 'sketchdown/parser'
+require 'sketchdown/renderer'
