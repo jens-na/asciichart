@@ -104,18 +104,22 @@ module Sketchdown
       return [includes, type]
     end
 
+    # Checks if the cell is a north west corner
     def is_corner_nw?(cell)
       return is_corner?(cell)[1] == :north_west
     end
 
+    # checks if the cell is a north east corner
     def is_corner_ne?(cell)
       return is_corner?(cell)[1] == :north_east
     end
 
+    # Checks if the cell is a south west corner
     def is_corner_sw?(cell)
       return is_corner?(cell)[1] == :south_west
     end
 
+    # Checks if the cell is a south east corner
     def is_corner_se?(cell)
       return is_corner?(cell)[1] == :south_east
     end
