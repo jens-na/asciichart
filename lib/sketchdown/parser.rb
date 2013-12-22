@@ -101,6 +101,23 @@ module Sketchdown
           type = :south_west
         end
       end
+      return [includes, type]
+    end
+
+    def is_corner_nw?(cell)
+      return is_corner?(cell)[1] == :north_west
+    end
+
+    def is_corner_ne?(cell)
+      return is_corner?(cell)[1] == :north_east
+    end
+
+    def is_corner_sw?(cell)
+      return is_corner?(cell)[1] == :south_west
+    end
+
+    def is_corner_se?(cell)
+      return is_corner?(cell)[1] == :south_east
     end
 
     # Checks if the given cell is a line.
