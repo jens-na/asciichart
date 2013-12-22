@@ -52,16 +52,14 @@ module Sketchdown
         :vertical => [ '|' ],
         :horizontal => [ '-' ]
       },
-
-      :corner => [ '+' ],
-
       :arrow => {
         :north => [ '^' ],
         :south => [ 'v', 'V' ],
         :west => [ '<' ],
         :east => [ '>' ]
-      }
-
+      }, 
+      :corner => [ '+' ],
+      :blank => [ ' ' ]
     }
 
     def initialize(grid, options)
@@ -73,11 +71,21 @@ module Sketchdown
 
     end
 
-    # Checks if the given cell is a corner
+    # Checks if the given cell is blank
     #
     # cell - the cell to check
     #
     # Returns true or false
+    def is_blank?(cell)
+      marks = MARKS[:blank]
+      marks.include?(@grid.get_char(cell))
+    end
+
+    # Checks if the given cell is a corner
+    #
+    # cell - the cell to check
+    #
+    # Returns true or false and the corner type
     def is_corner?(cell)
       marks = MARKS[:corner]
       includes = marks.include?(@grid.get_char(cell))
@@ -128,7 +136,7 @@ module Sketchdown
     #
     # cell - the cell to check
     #
-    # Returns true or false
+    # Returns true or false and the line type
     def is_line?(cell)
       marks = MARKS[:line]
       ch = @grid.get_char(cell)
@@ -141,7 +149,7 @@ module Sketchdown
           type = k
         end
       end
-      return includes, type
+      return [includes, type]
     end
 
     # Checks if the given cell is a vertical line
@@ -179,7 +187,7 @@ module Sketchdown
           type = k
         end
       end
-      return includes, type
+      return [includes, type]
     end
 
   end
