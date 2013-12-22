@@ -9,9 +9,14 @@ module Sketchdown
       @y = y
     end
 
-    # Returns the cell which is "north" of the current cell.
+    # Returns the cell which is "north" of the current cell. If
+    # y is 0 nil will be returned, negative cells are not allowed.
     def north
-      Textcell.new(@x, @y-1)
+      if @y == 0
+        nil
+      else
+        Textcell.new(@x, @y-1)
+      end
     end
 
     # Returns the cell which is "south" of the current cell.
