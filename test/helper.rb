@@ -2,5 +2,5 @@ require 'test/unit'
 require 'shoulda-context'
 require 'rr'
 
-require 'asciichart'
-include Asciichart
+require 'drawdown'
+include Drawdown

@@ -1,4 +1,4 @@
-module Asciichart
+module Drawdown
   class Textgrid
 
     attr_reader :maxwidth, :maxheight

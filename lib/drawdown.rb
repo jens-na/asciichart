@@ -13,6 +13,6 @@ end
 # stdlib
 
 # internal
-require 'asciichart/chart'
-require 'asciichart/textgrid'
-require 'asciichart/textcell'
+require 'drawdown/chart'
+require 'drawdown/textgrid'
+require 'drawdown/textcell'

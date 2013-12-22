@@ -1,4 +1,4 @@
-module Asciichart
+module Drawdown
 
   class Textcell
 

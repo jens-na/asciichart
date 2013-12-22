@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "asciichart/version"
+require "drawdown/version"
 
 Gem::Specification.new do |s|
-  s.name        = "asciichart"
-  s.version     = Asciichart::VERSION
+  s.name        = "drawdown"
+  s.version     = Drawdown::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jens Nazarenus"]
   s.email       = ["jens@0x6a.de"]
-  s.homepage    = "https://github.com/jens-na/asciichart"
+  s.homepage    = "https://github.com/jens-na/drawdown"
   s.summary     = %q{render ascii charts}
   s.description = %q{render ascii art charts to images}
 
