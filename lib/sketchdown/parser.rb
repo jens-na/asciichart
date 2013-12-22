@@ -80,7 +80,27 @@ module Sketchdown
     # Returns true or false
     def is_corner?(cell)
       marks = MARKS[:corner]
-      marks.include?(@grid.get_char(cell))
+      includes = marks.include?(@grid.get_char(cell))
+      type = nil
+
+      # determine the type of the corner
+      if includes
+        neighbors = @grid.get_neighbors(cell)
+        north = neighbors[:north]
+        south = neighbors[:south]
+        west = neighbors[:west]
+        east = neighbors[:east]
+
+        if is_hline(east) && is_vline(south)
+          type = :north_west
+        elsif is_hline(west) && is_vline(south) 
+          type = :north_east
+        elsif is_hline(west) && is_vline(north)
+          type = :south_east
+        elsif is_hline(east) && is_vline(north)
+          type = :south_west
+        end
+      end
     end
 
     # Checks if the given cell is a line.
@@ -103,6 +123,24 @@ module Sketchdown
       return includes, type
     end
 
+    # Checks if the given cell is a vertical line
+    #
+    # cell - the cell to check
+    #
+    # Returns true if the cell is a vertical line
+    def is_vline?(cell)
+      return is_line(cell)[1] == :vertical
+    end
+
+    # Checks if the given cell is a horizintal line
+    #
+    # cell - the cell to check
+    #
+    # Returns true if the cell is a horizintal line
+    def is_hline(cell)
+      return is_line(cell)[1] == :horizontal
+    end
+
     # Checks if the given cell is an arrow (head)
     #
     # cell - the cell to check
@@ -111,6 +149,16 @@ module Sketchdown
     def is_arrow?(cell)
       marks = MARKS[:arrow]
       ch = @grid.get_char((cell))
+      includes = false
+      type = nil
+
+      marks.each do |k,v|
+        if v.includes?(ch)
+          includes = true
+          type = k
+        end
+      end
+      return includes, type
     end
 
   end

@@ -62,7 +62,7 @@ INPUT
         cell = Textcell.new(0,0)
         cell2 = Textcell.new(24,2)
         @neighbors = grid.get_neighbors(cell)
-        @neighbors2 = grid.get_neighbors(cell2)
+        @neighbors2 = grid.get_neighbors_all(cell2)
       end
 
       should "return east and south cell" do
@@ -76,9 +76,15 @@ INPUT
         assert_equal nil, @neighbors[:north]
       end
 
-      should "return north, east, west cell" do
+      should "return cells correctly" do
         assert_equal 24, @neighbors2[:north].x
         assert_equal 1, @neighbors2[:north].y
+
+        assert_equal 23, @neighbors2[:north_west].x
+        assert_equal 1, @neighbors2[:north_west].y
+
+        assert_equal 25, @neighbors2[:north_east].x
+        assert_equal 1, @neighbors2[:north_east].y
 
         assert_equal 25, @neighbors2[:east].x
         assert_equal 2, @neighbors2[:east].y
@@ -87,6 +93,8 @@ INPUT
         assert_equal 2, @neighbors2[:west].y
 
         assert_equal nil, @neighbors2[:south]
+        assert_equal nil, @neighbors2[:south_east]
+        assert_equal nil, @neighbors2[:south_west]
       end
     end
   end
