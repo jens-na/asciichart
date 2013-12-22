@@ -15,14 +15,14 @@ module Sketchdown
       @maxwidth = calc_maxwidth(input)
       @maxheight = calc_maxheight(input)
       @input = input.chomp
-      parse_input(input)
+      populate_grid(input)
     end 
 
     # Parses the input data without the trailing newline
     # characters.
     #
     # input - the input chart
-    def parse_input(input)
+    def populate_grid(input)
       x = 0
       y = 0
       @grid = Array.new
