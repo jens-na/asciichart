@@ -1,4 +1,4 @@
-module Drawdown
+module Sketchdown
 
   class Chart
 

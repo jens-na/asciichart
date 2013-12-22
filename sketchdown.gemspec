@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "drawdown/version"
+require "sketchdown/version"
 
 Gem::Specification.new do |s|
-  s.name        = "drawdown"
-  s.version     = Drawdown::VERSION
+  s.name        = "sketchdown"
+  s.version     = Sketchdown::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jens Nazarenus"]
   s.email       = ["jens@0x6a.de"]
-  s.homepage    = "https://github.com/jens-na/drawdown"
+  s.homepage    = "https://github.com/jens-na/sketchdown"
   s.summary     = %q{render ascii charts}
   s.description = %q{render ascii art charts to images}
 

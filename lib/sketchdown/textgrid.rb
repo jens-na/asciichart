@@ -1,4 +1,4 @@
-module Drawdown
+module Sketchdown
   class Textgrid
 
     attr_reader :maxwidth, :maxheight

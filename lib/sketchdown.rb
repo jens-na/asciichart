@@ -13,6 +13,6 @@ end
 # stdlib
 
 # internal
-require 'drawdown/chart'
-require 'drawdown/textgrid'
-require 'drawdown/textcell'
+require 'sketchdown/chart'
+require 'sketchdown/textgrid'
+require 'sketchdown/textcell'
