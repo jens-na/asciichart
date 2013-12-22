@@ -52,5 +52,26 @@ class TestTextcell < Test::Unit::TestCase
         assert_equal nil, @cell0_north
       end
     end
+
+    context "check for equality" do
+      setup do
+        @cell1 = Textcell.new(12,14)
+        @cell2 = Textcell.new(12,13)
+        @cell3 = Textcell.new(14,12)
+        @cell4 = Textcell.new(12,14)
+      end
+
+      should "check for equality with ==" do
+        assert_equal false, @cell1 == @cell2
+        assert_equal false, @cell1 == @cell3
+        assert_equal true, @cell1 == @cell4
+      end
+
+      should "check for equality with eql?" do
+        assert_equal false, @cell1.eql?(@cell2)
+        assert_equal false, @cell1.eql?(@cell3)
+        assert_equal true, @cell1.eql?(@cell4)
+      end
+    end
   end
 end

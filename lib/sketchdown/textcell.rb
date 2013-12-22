@@ -36,37 +36,37 @@ module Sketchdown
       Textcell.new(@x+1, @y)
     end
 
+    # Returns the north eastern cell
     def north_east
       Textcell.new(@x+1, @y-1)
     end
 
+    # Returns the north western cell
     def north_west
       Textcell.new(@x-1, @y-1)
     end
 
+    # Returns the south eastern cell
     def south_east
       Textcell.new(@x+1, @y+1)
     end
 
+    # Returns the south western cell
     def south_west
       Textcell.new(@x-1, @y+1)
     end
 
-    def is_north_of(cell)
+    def ==(other)
+      other.class == self.class && other.state == state
+    end
+    alias_method :eql?, :==
 
+    # Helper method to implement equality
+    def state
+      [@x, @y]
     end
 
-    def is_south_of(cell)
-
-    end
-
-    def is_west_of(cell)
-
-    end
-
-    def is_east_of(cell)
-
-    end
+    protected :state
 
   end
 end
