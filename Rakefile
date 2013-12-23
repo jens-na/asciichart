@@ -15,7 +15,14 @@ def version
   line.match(/.*VERSION\s*=\s*['"](.*)['"]/)[1]
 end
 
-task :default => [:test, :features]
+if ENV["TRAVIS"] == "true"
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+
+  task :default => [:test, :features, 'coveralls:push']
+else
+  task :default => [:test, :features]
+end
 
 # << test
 require 'rake/testtask'
