@@ -14,6 +14,7 @@ end
 
 # internal
 require 'sketchdown/textgrid'
+require 'sketchdown/layer'
 require 'sketchdown/textcell'
 require 'sketchdown/document'
 require 'sketchdown/renderer'

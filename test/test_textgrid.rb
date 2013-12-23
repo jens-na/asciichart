@@ -23,19 +23,6 @@ INPUT
       end
     end
 
-    context "checks if cells exist" do
-      setup do
-        grid = Textgrid.new(@input)
-        @cell1 = grid.cell_exists?(Textcell.new(2,2))
-        @cell2 = grid.cell_exists?(Textcell.new(99,99))
-      end
-
-      should "return true if cell is valid" do
-        assert_equal true, @cell1
-        assert_equal false, @cell2
-      end
-    end
-
     context "get textual representation in grid" do
       setup do
         grid = Textgrid.new(@input)
