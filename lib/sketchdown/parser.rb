@@ -98,6 +98,19 @@ module Sketchdown
 
       # determine the type of the corner
       if includes
+        type = get_corner_type(cell)
+
+      end
+      return [includes, type]
+    end
+
+    # Determines the corner type of the current cell.
+    #
+    # cell - the cell which is used for determination
+    #
+    # Returns :north_east, :north_west, :south_east,
+    # :south_west
+    def get_corner_type(cell)
         neighbors = @grid.get_neighbors(cell)
         north = neighbors[:north]
         south = neighbors[:south]
@@ -105,16 +118,14 @@ module Sketchdown
         east = neighbors[:east]
 
         if is_hline(east) && is_vline(south)
-          type = :north_west
+          :north_west
         elsif is_hline(west) && is_vline(south) 
-          type = :north_east
+          :north_east
         elsif is_hline(west) && is_vline(north)
-          type = :south_east
+          :south_east
         elsif is_hline(east) && is_vline(north)
-          type = :south_west
+          :south_west
         end
-      end
-      return [includes, type]
     end
 
     # Checks if the cell is a north west corner
@@ -143,24 +154,13 @@ module Sketchdown
     #
     # Returns true or false and the line type
     def is_line?(cell)
-      marks = MARKS[:line]
-      ch = @grid.get_char(cell)
-      includes = false
-      type = nil
-
-      marks.each do |k,v|
-        if v.include?(ch)
-          includes = true
-          type = k
-        end
-      end
-      return [includes, type]
+      is_figure(cell, :line)
     end
 
     # Checks if the given cell is a vertical line
     #
     # cell - the cell to check
-    #
+    #)
     # Returns true if the cell is a vertical line
     def is_vline?(cell)
       return is_line(cell)[1] == :vertical
@@ -181,7 +181,18 @@ module Sketchdown
     #
     # Returns true or false
     def is_arrow?(cell)
-      marks = MARKS[:arrow]
+      is_figure(cell, :arrow)
+    end
+
+    # Checks if the given cell corresponds to a specified
+    # mark.
+    # 
+    # cell - the cell to check
+    # mark - the mark type (:line, :arrow, etc.)
+    #
+    # Returns true or false the the type of the figure
+    def is_figure(cell, mark)
+      marks = MARKS[type]
       ch = @grid.get_char((cell))
       includes = false
       type = nil
@@ -194,6 +205,5 @@ module Sketchdown
       end
       return [includes, type]
     end
-
   end
 end
