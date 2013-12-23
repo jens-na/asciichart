@@ -6,6 +6,26 @@ module Sketchdown
     attr_reader :maxwidth
     attr_reader :maxheight
 
+    # all the marks which may be available in the grid.
+    MARKS = {
+      :line => {
+        :vertical => [ '|' ],
+        :horizontal => [ '-' ]
+      },
+      :arrow => {
+        :north => [ '^' ],
+        :south => [ 'v', 'V' ],
+        :west => [ '<' ],
+        :east => [ '>' ]
+      }, 
+      :corner => { 
+        :all => [ '+' ]
+      },
+      :blank => {
+        :all => [ ' ' ]
+      }
+    }
+
     # Initialize a new Chart with the given input
     #
     # input - the input chart
@@ -65,7 +85,9 @@ module Sketchdown
     #
     # Returns the text or nil if cell does not exist
     def get_char(cell)
+      return nil if cell == nil
       ch = nil
+
       if cell.y < @input.lines.count
         line = @input.lines[cell.y]
         ch = line[cell.x]
@@ -127,6 +149,28 @@ module Sketchdown
         hash[:south_east] = south_east
       end
       hash
+    end
+
+    # Checks if the specified cell reflects the given mark
+    #
+    # cell - the cell to check
+    # mark - the mark (:line, :arrow, etc.)
+    #
+    # Returns true or flase and the direction type of the
+    # figure 
+    def is_figure(cell, mark)
+      marks = MARKS[mark]
+      ch = get_char(cell)
+      includes = false
+      type = nil
+
+      marks.each do |k,v|
+        if v.include?(ch)
+          includes = true
+          type = k
+        end
+      end
+      return [includes, type]
     end
 
     # Calculates the width. The width is the length of the line with

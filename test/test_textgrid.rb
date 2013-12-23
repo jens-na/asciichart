@@ -61,8 +61,10 @@ INPUT
         grid = Textgrid.new(@input)
         cell = Textcell.new(0,0)
         cell2 = Textcell.new(24,2)
+        cell3 = Textcell.new(16,1)
         @neighbors = grid.get_neighbors(cell)
         @neighbors2 = grid.get_neighbors_all(cell2)
+        @neighbors3 = grid.get_neighbors_all(cell3)
       end
 
       should "return east and south cell" do
@@ -95,6 +97,45 @@ INPUT
         assert_equal nil, @neighbors2[:south]
         assert_equal nil, @neighbors2[:south_east]
         assert_equal nil, @neighbors2[:south_west]
+      end
+
+      should "return south cells correctly" do
+        assert_equal 15, @neighbors3[:south_west].x
+        assert_equal 2, @neighbors3[:south_west].y
+
+        assert_equal 17, @neighbors3[:south_east].x
+        assert_equal 2, @neighbors3[:south_east].y
+      end
+    end
+
+    context "figure check" do
+      setup do
+        @grid = Textgrid.new(@input)
+        @cell_corner = Textcell.new(0,0)
+        @cell_hline = Textcell.new(1,0)
+        @cell_vline = Textcell.new(0,1)
+        @cell_arrow_w = Textcell.new(16,1)
+        @cell_blank = Textcell.new(1,1)
+      end
+
+      should "recognize a corner" do
+        assert_equal [true, :all], @grid.is_figure(@cell_corner, :corner)
+      end
+
+      should "recognize a horizontal line" do
+        assert_equal [true, :horizontal], @grid.is_figure(@cell_hline, :line)
+      end
+
+      should "recognize a vertical line" do
+        assert_equal [true, :vertical], @grid.is_figure(@cell_vline, :line)
+      end
+
+      should "recognize a west arrow" do 
+        assert_equal [true, :west], @grid.is_figure(@cell_arrow_w, :arrow)
+      end
+
+      should "recognize a blank field" do
+        assert_equal [true, :all], @grid.is_figure(@cell_blank, :blank)
       end
     end
   end

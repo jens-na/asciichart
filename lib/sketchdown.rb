@@ -16,6 +16,5 @@ end
 require 'sketchdown/textgrid'
 require 'sketchdown/textcell'
 require 'sketchdown/document'
-require 'sketchdown/parser'
 require 'sketchdown/renderer'
 require 'sketchdown/options'
