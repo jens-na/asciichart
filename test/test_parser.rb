@@ -30,5 +30,32 @@ INPUT
 
     end
 
+    context "recognize horizontal line" do
+      setup do
+        input = <<INPUT
+
+     ---------->
+
+INPUT
+      end
+
+      should "parse the line" do
+
+      end
+    end
+
+    context "recognize vertical line" do
+      setup do
+        input = <<INPUT
+
+      ^
+      |
+      |
+      |
+
+INPUT
+      end
+    end
+
   end
 end

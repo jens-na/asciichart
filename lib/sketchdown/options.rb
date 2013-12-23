@@ -2,9 +2,14 @@ module Sketchdown
 
   class Options < Hash
 
-    # The default options
     OPTIONS = {
-      'renderer' => 'png'
+
+      # the default renderer to use
+      'renderer' => 'png',
+
+      # don't parse the blanks left or right to the
+      # sketch
+      'shrink' => false
     }
 
   end
