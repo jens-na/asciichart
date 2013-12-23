@@ -47,7 +47,6 @@ module Sketchdown
     # V or v
     
     MARKS = {
-      
       :line => {
         :vertical => [ '|' ],
         :horizontal => [ '-' ]
@@ -78,7 +77,13 @@ module Sketchdown
     # Returns true or false
     def is_blank?(cell)
       marks = MARKS[:blank]
-      marks.include?(@grid.get_char(cell))
+      ch = @grid.get_char(cell)
+
+      # this should not happen, but if no char can be found the 
+      # cell is probably out of bounds so it should be blank
+      return true if ch == nil
+
+      marks.include?(ch)
     end
 
     # Checks if the given cell is a corner
