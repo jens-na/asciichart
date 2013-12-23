@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redgreen', "~> 1.2.2")
   s.add_development_dependency('shoulda-context', "~> 1.1.6") 
   s.add_development_dependency('rr', "~> 1.1.2")
+  s.add_development_dependency('coveralls', "~> 0.7.0")
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
