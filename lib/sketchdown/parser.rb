@@ -99,7 +99,6 @@ module Sketchdown
       # determine the type of the corner
       if includes
         type = get_corner_type(cell)
-
       end
       return [includes, type]
     end
