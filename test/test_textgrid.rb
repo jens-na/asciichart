@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestChart < Test::Unit::TestCase
+class TestTextgrid < Test::Unit::TestCase
 
   context "A textgrid" do
     setup do
