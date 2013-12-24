@@ -9,29 +9,42 @@ module Sketchdown
 
     def parse
 
-      # duplicate layer
-      # find and remove rectangles 
-      # render lines, arrows and stuff
-      # build layer for rectangles and parse them
-      #
-      #
-      # ---+
-      #    |     +-------+
-      #    +---> |       |
-      #          +-------+
-      #
-      # +-->  +------+
-      # |     |      |
-      # |     |      |
-      #       +------+
-      
       for e in @root
 
       end
       
     end
 
-    def 
+    # Returns all subsets of a given layer.
+    #
+    # Example:
+    # +----------+
+    # | +---+    |         +------+
+    # | |   |    | <------ |      |
+    # | +---+    |         +------+
+    # +----------+
+    #
+    # layer 0:
+    # +----------+
+    # | +---+    |
+    # | |   |    |
+    # | +---+    |
+    # +----------+
+    #
+    # layer 1:
+    # <------
+    #
+    # layer 2:
+    # +------+
+    # |      |
+    # +------+
+    #
+    # layer - the layer used for calculation
+    #
+    # Returns an array of other layer
+    def get_layers(layer)
+      
+    end
 
   end
 end
