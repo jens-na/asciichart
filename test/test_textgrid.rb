@@ -103,10 +103,10 @@ INPUT
         @cell_vline = Textcell.new(0,1)
         @cell_arrow_w = Textcell.new(16,1)
         @cell_blank = Textcell.new(1,1)
-      end
+      end 
 
       should "recognize a corner" do
-        assert_equal [true, :all], @grid.is_figure(@cell_corner, :corner)
+        assert_equal [true, :north_west], @grid.is_figure(@cell_corner, :corner)
       end
 
       should "recognize a horizontal line" do
@@ -124,6 +124,26 @@ INPUT
       should "recognize a blank field" do
         assert_equal [true, :all], @grid.is_figure(@cell_blank, :blank)
       end
+    end
+
+    context "corner types" do
+      setup do
+        @grid = Textgrid.new(@input)
+        @nw = Textcell.new(0,0)
+        @ne = Textcell.new(14,0)
+        @se = Textcell.new(14,3)
+        @sw = Textcell.new(0,3)
+        @no = Textcell.new(99,99)
+      end
+
+      should "recognize all corners" do
+        assert_equal [true, :north_west], @grid.is_figure(@nw, :corner)
+        assert_equal [true, :north_east], @grid.is_figure(@ne, :corner)
+        assert_equal [true, :south_east], @grid.is_figure(@se, :corner)
+        assert_equal [true, :south_west], @grid.is_figure(@sw, :corner)
+        assert_equal [false, nil], @grid.is_figure(@no, :corner)
+      end
+
     end
   end
 end

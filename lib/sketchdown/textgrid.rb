@@ -146,10 +146,47 @@ module Sketchdown
       marks.each do |k,v|
         if v.include?(ch)
           includes = true
-          type = k
+
+          if mark == :corner
+            type = get_corner_type(cell)
+          else
+            type = k
+          end
         end
       end
       return [includes, type]
+    end
+
+    def is_hline?(cell)
+      is_figure(cell, :line)[1] == :horizontal
+    end
+
+    def is_vline?(cell)
+      is_figure(cell, :line)[1] == :vertical
+    end
+
+    # Determines the corner type of the current cell.
+    #
+    # cell - the cell which is used for determination
+    #
+    # Returns :north_east, :north_west, :south_east,
+    # :south_west
+    def get_corner_type(cell)
+      neighbors = get_neighbors(cell)
+      north = neighbors[:north]
+      south = neighbors[:south]
+      west = neighbors[:west]
+      east = neighbors[:east]
+
+      if is_hline?(east) && is_vline?(south)
+        :north_west
+      elsif is_hline?(west) && is_vline?(south) 
+        :north_east
+      elsif is_hline?(west) && is_vline?(north)
+        :south_east
+      elsif is_hline?(east) && is_vline?(north)
+        :south_west
+      end
     end
 
     # Calculates the width. The width is the length of the line with
