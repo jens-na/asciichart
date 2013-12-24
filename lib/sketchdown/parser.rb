@@ -15,7 +15,7 @@ module Sketchdown
       
     end
 
-    # Returns all subsets of a given layer.
+    # Returns all sub layer of a given root layer.
     #
     # Example:
     # +----------+
@@ -43,6 +43,18 @@ module Sketchdown
     #
     # Returns an array of other layer
     def get_layers(layer)
+
+    end
+
+    # Checks if the given layer contains areas and return them in
+    # an array.
+    #
+    # layer - the given root layer used for calculation
+    #
+    # Returns a list of areas or an empty array if no areas found 
+    def get_areas(layer)
+      areas = Array.new
+
       
     end
 
