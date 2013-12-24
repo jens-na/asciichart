@@ -3,6 +3,7 @@ module Sketchdown
   # The layer class is a set of text cells inside the sketch. A layer
   # may be the root layer of the sketch or a subset of it.
   class Layer
+    extend Forwardable
 
     # Initializes a new layer
     def initialize
@@ -31,6 +32,8 @@ module Sketchdown
     def include?(cell)
       @layer.include?(cell)
     end
+
+    def_delegators :@layer, :each
 
   end
 end
