@@ -73,5 +73,31 @@ class TestTextcell < Test::Unit::TestCase
         assert_equal true, @cell1.eql?(@cell4)
       end
     end
+
+    context "direction of other cell" do
+      setup do
+        @cell = Textcell.new(3,3)
+        @cell_east_of = Textcell.new(4,3)
+        @cell_west_of = Textcell.new(2,3)
+        @cell_south_of = Textcell.new(3,4)
+        @cell_north_of = Textcell.new(3,2)
+      end
+
+      should "cell is east of other cell" do
+        assert_equal true, @cell_east_of.is_east_of(@cell)
+      end
+
+      should "cell is west of other cell" do
+        assert_equal true, @cell_west_of.is_west_of(@cell)
+      end
+      
+      should "cell is north of other cell" do
+        assert_equal true, @cell_north_of.is_north_of(@cell)
+      end
+
+      should "cell is south of other cell" do
+        assert_equal true, @cell_south_of.is_south_of(@cell)
+      end
+    end
   end
 end

@@ -56,6 +56,24 @@ module Sketchdown
       Textcell.new(@x-1, @y+1)
     end
 
+    # Checks if the current cell is east of another cell
+    def is_east_of(other)
+      other.y == @y && @x >= other.x 
+    end
+
+    def is_west_of(other)
+      other.y == @y && @x <= other.x
+    end
+
+    def is_north_of(other)
+      other.x == @x && @y <= other.y
+
+    end
+
+    def is_south_of(other)
+      other.x == @x && @y >= other.y
+    end
+
     def ==(other)
       other.class == self.class && other.state == state
     end
