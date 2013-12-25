@@ -99,5 +99,28 @@ class TestTextcell < Test::Unit::TestCase
         assert_equal true, @cell_south_of.is_south_of(@cell)
       end
     end
+
+    context "create cells from an array" do
+      setup do
+        @cells_arr = %w[
+          0,0
+          0,1
+          0,2
+          1,0
+          1,1
+          1,2
+        ]
+        @cells = Textcell.create_multiple(@cells_arr)
+      end
+
+      should "create textcells from array" do
+        assert_equal Textcell.new(0,0), @cells[0]
+        assert_equal Textcell.new(0,1), @cells[1]
+        assert_equal Textcell.new(0,2), @cells[2]
+        assert_equal Textcell.new(1,0), @cells[3]
+        assert_equal Textcell.new(1,1), @cells[4]
+        assert_equal Textcell.new(1,2), @cells[5]
+      end
+    end
   end
 end

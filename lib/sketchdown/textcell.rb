@@ -14,6 +14,28 @@ module Sketchdown
       @y = y
     end
 
+    # Create textcells from a textual representation of cells.
+    #
+    # Example:
+    #    array = %w[
+    #       0,0
+    #       0,1
+    #    ]
+    #
+    # array - an array of strings
+    #
+    # Returns the textcells
+    def self.create_multiple(array)
+      cells = Array.new
+
+      for e in array
+        item = e.split(',')
+        cell = Textcell.new(item[0].to_i, item[1].to_i)
+        cells.push(cell) unless cells.include?(cell)
+      end
+      cells
+    end
+
     # Returns the cell which is "north" of the current cell. If
     # y is 0 nil will be returned, negative cells are not allowed.
     def north
