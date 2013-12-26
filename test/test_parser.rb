@@ -41,7 +41,6 @@ INPUT
       end
 
       should "return correct cells until north east corner" do
-        require 'pry'; binding.pry
         assert_equal @expected_cells, @cells
       end
     end
