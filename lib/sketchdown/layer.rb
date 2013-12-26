@@ -5,30 +5,32 @@ module Sketchdown
   class Layer
     extend Forwardable
 
+    attr_reader :cells
+
     # Initializes a new layer
     def initialize
-      @layer = Array.new
+      @cells = Array.new
     end
 
     # Adds a cell to the layer
     #
     # cell - the cell to add to the layer
     def add(cell)
-      @layer.push(cell)
+      @cells.push(cell)
     end
 
     # Adds an array of cells to the layer
     #
     # cells - an array of cells
     def add_all(cells)
-      @layer.concat(cells)
+      @cells.concat(cells)
     end
 
     # Removes a specified cell from the layer
     #
     # cell - the cell to remove
     def remove(cell)
-      @layer.delete(cell)
+      @cells.delete(cell)
     end
 
     # Checks if the given cell is part of the layer.
@@ -37,11 +39,11 @@ module Sketchdown
     #
     # Returns true or false
     def include?(cell)
-      @layer.include?(cell)
+      @cells.include?(cell)
     end
 
     # Returns a sub layer which only contains cells
-    # in a specific deirection relative to the given cell.
+    # in a specific direction relative to the specified cell.
     #
     # Example:
     #
@@ -56,7 +58,7 @@ module Sketchdown
     # cell: (0,4)
     # direction: north
     #
-    #      +
+    #      + < (0,0)
     #      |
     #      |
     #      |
@@ -70,14 +72,14 @@ module Sketchdown
     def get_sublayer(cell, direction)
       sublayer = Layer.new
 
-      if(direction == :east)
-        sublayer.add_all(get_cells_east_of(cell))
-      elsif(direction == :west)
-        sublayer.add_all(get_cells_west_of(cell))
-      elsif(direction == :south)
-        sublayer.add_all(get_cells_south_of(cell))
-      elsif(direction == :north)
-        sublayer.add_all(get_cells_north_of(cell))
+      if direction == :east
+        sublayer.add_all(get_cells_east_of(@cells, cell))
+      elsif direction == :west
+        sublayer.add_all(get_cells_west_of(@cells, cell))
+      elsif direction == :south
+        sublayer.add_all(get_cells_south_of(@cells, cell))
+      elsif direction == :north
+        sublayer.add_all(get_cells_north_of(@cells, cell))
       end
       sublayer
     end
@@ -130,7 +132,7 @@ module Sketchdown
       cells
     end
 
-    def_delegators :@layer, :each
+    def_delegators :@cells, :each
 
   end
 end
