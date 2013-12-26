@@ -101,7 +101,7 @@ module Sketchdown
       hash
     end
 
-    # Returns all the neghbors of the current cell which is specifically
+    # Returns all the neighbors of the current cell which is specifically
     # :north, :south, :west, :east, :north_west, :north_east, :south_west
     # and :south_east
     #
@@ -130,13 +130,41 @@ module Sketchdown
       hash
     end
 
+    # Determine the figure for a specific cell.
+    #
+    # cell - the cell
+    #
+    # Returns the figure and the type in an array.
+    #
+    # Example:
+    #   [:line, :horizontal] or [:blank, :all]
+    def get_figure(cell)
+      ch = get_char(cell)
+      rettype = nil
+      
+      MARKS.each do |mark,types|
+        types.each do |type,array|
+          if array.include?(ch)
+            rettype = type
+            if mark == :corner
+              rettype = get_corner_type(cell)
+            end
+            return [mark, rettype]
+          end
+        end
+      end
+    end
+
     # Checks if the specified cell reflects the given mark
     #
     # cell - the cell to check
     # mark - the mark (:line, :arrow, etc.)
     #
     # Returns true or flase and the direction type of the
-    # figure 
+    # figure.
+    #
+    # Example:
+    #   [true, :horizontal] or [true, :north_east]
     def is_figure(cell, mark)
       marks = MARKS[mark]
       ch = get_char(cell)

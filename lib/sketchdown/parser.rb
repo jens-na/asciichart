@@ -8,10 +8,6 @@ module Sketchdown
     end
 
     def parse
-
-      for e in @root
-
-      end
       
     end
 
@@ -72,6 +68,13 @@ module Sketchdown
     #
     # Returns a list of areas or an empty array if no areas found 
     def get_areas(layer)
+      for e in layer
+        if @grid.is_figure(e, [:corner, :north_west])
+          east_cells = layer.get_sublayer(e, :east)
+          
+
+        end
+      end
 
     end
 
@@ -93,8 +96,49 @@ module Sketchdown
     # :north, :east, :south or :west
     #
     # Returns an array of cells between from and to.
-    def follow_figure(layer, from, to, direction)
+    def follow_figure(layer, from, to)
+      cells = []
+      first = layer.cells[0]
 
+      # first cell must fit the from rule
+      if @grid.is_figure(first, from[0]) == [false, nil]
+        return nil
+      end
+
+      i = 0
+      begin
+        cell = layer[i]
+        cellnext = layer[i+1]
+
+        if @grid.get_figure(cell) == from
+          cells.push(cell)
+        end
+
+        if @grid.get_figure(cellnext) == to
+          return cells
+        end
+
+        i+=1
+      end until i > layer.cells.length
+
+      cells
+    end
+
+    # Checks if the given layer is an area.
+    #
+    # Example:
+    #   +------+      
+    #   |      | 
+    #   +------+      
+    #                 
+    # The function specifically checks if the last cell
+    # is a neighbor of the first cell.
+    #
+    # layer - the layer which contains the cells
+    # 
+    # Returns true if the layer is an area or false
+    def is_area?(layer)
+      
     end
 
   end

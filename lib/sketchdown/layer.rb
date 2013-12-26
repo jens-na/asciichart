@@ -132,6 +132,7 @@ module Sketchdown
       cells
     end
 
+    def_delegators :@cells, :[]
     def_delegators :@cells, :each
 
   end

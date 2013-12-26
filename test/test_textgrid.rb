@@ -95,6 +95,17 @@ INPUT
       end
     end
 
+    context "determine figure" do
+      setup do
+        @grid = Textgrid.new(@input)
+        @figure1 = @grid.get_figure(Textcell.new(0,0))
+      end
+
+      should "determine a north west corner" do
+        assert_equal [:corner, :north_west], @figure1
+      end
+    end
+
     context "figure check" do
       setup do
         @grid = Textgrid.new(@input)
