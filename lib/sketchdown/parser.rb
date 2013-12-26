@@ -68,14 +68,40 @@ module Sketchdown
     #
     # Returns a list of areas or an empty array if no areas found 
     def get_areas(layer)
-      for e in layer
-        if @grid.is_figure(e, [:corner, :north_west])
-          east_cells = layer.get_sublayer(e, :east)
-          
+      hline = [:line, :horizontal]
+      vline = [:line, :vertical]
+      areas = []
 
+      for e in layer.cells
+        if @grid.get_figure(e) == [:corner, :north_west]
+          cells = Array.new
+          
+          # get line between north west and north east corner
+          east_layer = layer.get_sublayer(e, :east)
+          line = follow_figure(east_layer, hline, [:corner, :north_east], :east)
+          cells.concat(line) unless line == nil
+
+          # get line between north east and south east corner
+          south_layer = layer.get_sublayer(line[-1].east, :south)
+          line = follow_figure(south_layer, vline, [:corner, :south_east], :south)
+          cells.concat(line) unless line == nil
+
+          # get line between south east and south west corner
+          west_layer = layer.get_sublayer(line[-1].south, :west)
+          line = follow_figure(west_layer, hline, [:corner, :south_west], :west)
+          cells.concat(line) unless line == nil
+          
+          # get line between south west and north west corner
+          north_layer = layer.get_sublayer(line[-1].west, :north)
+          line = follow_figure(north_layer, vline, [:corner, :north_west], :north)
+          cells.concat(line) unless line == nil
+
+          area = Layer.new
+          area.add_all(cells)
+          areas.push(area)
         end
       end
-
+      areas
     end
 
     # Follow an arbitary figure until another figure is reached.
@@ -96,19 +122,24 @@ module Sketchdown
     # :north, :east, :south or :west
     #
     # Returns an array of cells between from and to.
-    def follow_figure(layer, from, to)
-      cells = []
-      first = layer.cells[0]
+    def follow_figure(layer, from, to, direction)
+      calclayer = layer.cells
+      if direction == :west || direction == :north
+        calclayer = layer.cells.reverse
+      end
+
+      first = calclayer[0]
 
       # first cell must fit the from rule
       if @grid.is_figure(first, from[0]) == [false, nil]
         return nil
       end
 
+      cells = []
       i = 0
       begin
-        cell = layer[i]
-        cellnext = layer[i+1]
+        cell = calclayer[i]
+        cellnext = calclayer[i+1]
 
         if @grid.get_figure(cell) == from
           cells.push(cell)
@@ -119,9 +150,9 @@ module Sketchdown
         end
 
         i+=1
-      end until i > layer.cells.length
+      end until i > calclayer.length
 
-      cells
+      nil
     end
 
     # Checks if the given layer is an area.
