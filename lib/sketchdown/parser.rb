@@ -79,22 +79,26 @@ module Sketchdown
           # get line between north west and north east corner
           east_layer = layer.get_sublayer(e, :east)
           line = follow_figure(east_layer, hline, [:corner, :north_east], :east)
-          cells.concat(line) unless line == nil
+          next if line == nil
+          cells.concat(line) 
 
           # get line between north east and south east corner
           south_layer = layer.get_sublayer(line[-1].east, :south)
           line = follow_figure(south_layer, vline, [:corner, :south_east], :south)
-          cells.concat(line) unless line == nil
+          next if line == nil
+          cells.concat(line)
 
           # get line between south east and south west corner
           west_layer = layer.get_sublayer(line[-1].south, :west)
           line = follow_figure(west_layer, hline, [:corner, :south_west], :west)
-          cells.concat(line) unless line == nil
+          next if line == nil
+          cells.concat(line)
           
           # get line between south west and north west corner
           north_layer = layer.get_sublayer(line[-1].west, :north)
           line = follow_figure(north_layer, vline, [:corner, :north_west], :north)
-          cells.concat(line) unless line == nil
+          next if line == nil
+          cells.concat(line)
 
           area = Layer.new
           area.add_all(cells)
