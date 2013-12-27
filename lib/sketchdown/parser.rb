@@ -64,7 +64,7 @@ module Sketchdown
     #   |      |
     #   +------+
     #
-    # layer - the given root layer used for calculation
+    # layer - the given layer used for calculation
     #
     # Returns a list of areas or an empty array if no areas found 
     def get_areas(layer)
@@ -75,26 +75,30 @@ module Sketchdown
       for e in layer.cells
         if @grid.get_figure(e) == [:corner, :north_west]
           cells = Array.new
-          
+
           # get line between north west and north east corner
+          cells.push(e)
           east_layer = layer.get_sublayer(e, :east)
           line = follow_figure(east_layer, hline, [:corner, :north_east], :east)
           next if line == nil
           cells.concat(line) 
 
           # get line between north east and south east corner
+          cells.push(line[-1].east)
           south_layer = layer.get_sublayer(line[-1].east, :south)
           line = follow_figure(south_layer, vline, [:corner, :south_east], :south)
           next if line == nil
           cells.concat(line)
 
           # get line between south east and south west corner
+          cells.push(line[-1].south)
           west_layer = layer.get_sublayer(line[-1].south, :west)
           line = follow_figure(west_layer, hline, [:corner, :south_west], :west)
           next if line == nil
           cells.concat(line)
           
           # get line between south west and north west corner
+          cells.push(line[-1].west)
           north_layer = layer.get_sublayer(line[-1].west, :north)
           line = follow_figure(north_layer, vline, [:corner, :north_west], :north)
           next if line == nil
