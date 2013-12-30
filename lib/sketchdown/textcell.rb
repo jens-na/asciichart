@@ -119,7 +119,7 @@ module Sketchdown
 
     # Helper method to implement equality
     def state
-      [@x, @y, @figure, @grid]
+      [@x, @y]
     end
 
     protected :state

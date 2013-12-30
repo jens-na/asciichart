@@ -26,7 +26,7 @@ module Sketchdown
     #   [:blank, :all]
     INPUT_FIGURES = { 
       :line => {
-        :horinzontal  => ['-'],
+        :horizontal  => ['-'],
         :vertical     => ['|']
       },
 
@@ -48,8 +48,8 @@ module Sketchdown
 
     def initialize(input)
       @input = input.chomp
-      @width = width(input)
-      @height = height(input)
+      @width = calc_width(input)
+      @height = calc_height(input)
       populate_grid(input)
     end
 
@@ -76,7 +76,7 @@ module Sketchdown
       ch = get_char(cell)
       rettype = nil
       
-      MARKS.each do |mark,types|
+      INPUT_FIGURES.each do |mark,types|
         types.each do |type,array|
           if array.include?(ch)
             rettype = type
@@ -170,7 +170,7 @@ module Sketchdown
       get_figure(cell) == [:line, :vertical]
     end
 
-    def width(input)
+    def calc_width(input)
       width = 0
       input.each_line do |line|
         if width < line.length-1
@@ -180,7 +180,7 @@ module Sketchdown
       width
     end
 
-    def height(input)
+    def calc_height(input)
       input.lines.count 
     end
 
