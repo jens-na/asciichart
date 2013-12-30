@@ -4,6 +4,8 @@ module Sketchdown
 
     attr_reader :x
     attr_reader :y
+    attr_reader :figure
+    attr_reader :grid
 
     # Initializes a cell with the corresponding (x,y) pair
     #
@@ -12,6 +14,21 @@ module Sketchdown
     def initialize(x,y)
       @x = x
       @y = y
+    end
+
+    # Sets the parent of the cell which is a grid where the
+    # cell is part of
+    #
+    # grid - the parent grid
+    def set_parent(grid)
+      @grid = grid
+    end
+
+    # Sets the figure of the cell
+    #
+    # figure - the figure which is an array like [:line, :vertical]
+    def set_figure(figure)
+      @figure = figure
     end
 
     # Create textcells from a textual representation of cells.
@@ -89,7 +106,6 @@ module Sketchdown
 
     def is_north_of(other)
       other.x == @x && @y < other.y
-
     end
 
     def is_south_of(other)
@@ -103,7 +119,7 @@ module Sketchdown
 
     # Helper method to implement equality
     def state
-      [@x, @y]
+      [@x, @y, @figure, @grid]
     end
 
     protected :state
