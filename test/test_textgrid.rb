@@ -46,9 +46,9 @@ INPUT
     context "get neighbors of the current cell" do
       setup do
         grid = Textgrid.new(@input)
-        cell = Textcell.new(0,0)
-        cell2 = Textcell.new(24,2)
-        cell3 = Textcell.new(16,1)
+        cell = Textcell.new(0,0,grid)
+        cell2 = Textcell.new(24,2,grid)
+        cell3 = Textcell.new(16,1,grid)
         @neighbors = grid.get_neighbors(cell)
         @neighbors2 = grid.get_neighbors_all(cell2)
         @neighbors3 = grid.get_neighbors_all(cell3)
@@ -98,7 +98,7 @@ INPUT
     context "determine figure" do
       setup do
         @grid = Textgrid.new(@input)
-        @figure1 = @grid.get_figure(Textcell.new(0,0))
+        @figure1 = @grid.get_figure(Textcell.new(0,0,@grid))
       end
 
       should "determine a north west corner" do
@@ -109,11 +109,11 @@ INPUT
     context "figure check" do
       setup do
         @grid = Textgrid.new(@input)
-        @cell_corner = Textcell.new(0,0)
-        @cell_hline = Textcell.new(1,0)
-        @cell_vline = Textcell.new(0,1)
-        @cell_arrow_w = Textcell.new(16,1)
-        @cell_blank = Textcell.new(1,1)
+        @cell_corner = Textcell.new(0,0,@grid)
+        @cell_hline = Textcell.new(1,0,@grid)
+        @cell_vline = Textcell.new(0,1,@grid)
+        @cell_arrow_w = Textcell.new(16,1,@grid)
+        @cell_blank = Textcell.new(1,1,@grid)
       end
 
       should "recognize a corner" do
@@ -140,11 +140,11 @@ INPUT
     context "corner types" do
       setup do
         @grid = Textgrid.new(@input)
-        @nw = Textcell.new(0,0)
-        @ne = Textcell.new(14,0)
-        @se = Textcell.new(14,3)
-        @sw = Textcell.new(0,3)
-        @no = Textcell.new(99,99)
+        @nw = Textcell.new(0,0,@grid)
+        @ne = Textcell.new(14,0,@grid)
+        @se = Textcell.new(14,3,@grid)
+        @sw = Textcell.new(0,3,@grid)
+        @no = Textcell.new(99,99,@grid)
       end
 
       should "recognize all corners" do

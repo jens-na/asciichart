@@ -61,8 +61,8 @@ module Sketchdown
       input.each_line do |line|
         line.chomp.each_char do |char|
           cell = Textcell.new(x,y)
-          figure = get_figure(cell)
-          cell.set_figure(figure)
+          cell.set_parent(self)
+          cell.set_figure(get_figure(cell))
           @cells.push(cell)
           x+=1
         end

@@ -5,23 +5,25 @@ module Sketchdown
     attr_reader :x
     attr_reader :y
     attr_reader :figure
-    attr_reader :grid
+    attr_reader :parent
 
     # Initializes a cell with the corresponding (x,y) pair
     #
     # x - the x value, refers to a character in a line
     # y - the y value, refers to the line no of the input
-    def initialize(x,y)
+    def initialize(x, y, parent=nil)
       @x = x
       @y = y
+      @parent = parent
     end
+
 
     # Sets the parent of the cell which is a grid where the
     # cell is part of
     #
-    # grid - the parent grid
-    def set_parent(grid)
-      @grid = grid
+    # parent - the parent grid
+    def set_parent(parent)
+      @parent = parent
     end
 
     # Sets the figure of the cell
@@ -57,42 +59,42 @@ module Sketchdown
     # y is 0 nil will be returned, negative cells are not allowed.
     def north
       return nil if @y == 0
-      Textcell.new(@x, @y-1)
+      Textcell.new(@x, @y-1,@parent)
     end
 
     # Returns the cell which is "south" of the current cell.
     def south
-      Textcell.new(@x, @y+1)
+      Textcell.new(@x, @y+1,@parent)
     end
 
     # Returns the cell which is westward of the current cell.
     def west
-      Textcell.new(@x-1, @y)
+      Textcell.new(@x-1, @y,@parent)
     end
 
     # Returns the cell which is eastward of the current cell.
     def east
-      Textcell.new(@x+1, @y)
+      Textcell.new(@x+1, @y,@parent)
     end
 
     # Returns the north eastern cell
     def north_east
-      Textcell.new(@x+1, @y-1)
+      Textcell.new(@x+1, @y-1,@parent)
     end
 
     # Returns the north western cell
     def north_west
-      Textcell.new(@x-1, @y-1)
+      Textcell.new(@x-1, @y-1,@parent)
     end
 
     # Returns the south eastern cell
     def south_east
-      Textcell.new(@x+1, @y+1)
+      Textcell.new(@x+1, @y+1,@parent)
     end
 
     # Returns the south western cell
     def south_west
-      Textcell.new(@x-1, @y+1)
+      Textcell.new(@x-1, @y+1,@parent)
     end
 
     # Checks if the current cell is east of another cell
@@ -119,7 +121,7 @@ module Sketchdown
 
     # Helper method to implement equality
     def state
-      [@x, @y]
+      [@x, @y, @parent]
     end
 
     protected :state
