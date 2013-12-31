@@ -62,15 +62,21 @@ module Sketchdown
         line.chomp.each_char do |char|
           cell = Textcell.new(x,y)
           cell.set_parent(self)
-          cell.set_figure(get_figure(cell))
           @cells.push(cell)
           x+=1
         end
         x=0
         y+=1
       end
+
+      populate_figures
     end
 
+    def populate_figures
+       for e in @cells
+         e.set_figure(get_figure(e))
+       end
+    end
 
     def get_figure(cell)
       ch = get_char(cell)

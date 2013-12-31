@@ -11,12 +11,11 @@ module Sketchdown
     #
     # x - the x value, refers to a character in a line
     # y - the y value, refers to the line no of the input
-    def initialize(x, y, parent=nil)
+    def initialize(x, y, parent = nil)
       @x = x
       @y = y
       @parent = parent
     end
-
 
     # Sets the parent of the cell which is a grid where the
     # cell is part of
@@ -119,7 +118,6 @@ module Sketchdown
     end
     alias_method :eql?, :==
 
-    # Helper method to implement equality
     def state
       [@x, @y, @parent]
     end
