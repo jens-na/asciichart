@@ -26,7 +26,7 @@ module Sketchdown
     #   [:blank, :all]
     INPUT_FIGURES = { 
       :line => {
-        :horizontal  => ['-'],
+        :horizontal   => ['-'],
         :vertical     => ['|']
       },
 
@@ -70,6 +70,10 @@ module Sketchdown
       end
 
       populate_figures
+    end
+
+    def get(x,y)
+      @cells.select { |e| e.x == x && e.y == y }[0]
     end
 
     def populate_figures
