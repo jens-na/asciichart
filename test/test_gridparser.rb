@@ -7,7 +7,12 @@ class TestGridParser < Test::Unit::TestCase
       @input = <<INPUT
 +-------------+         +---------+
 |             | <------ | Test    |
-|             |         +---------+
+|   +----+    |         +---------+
+|   |    |    |
+|   |    |    |
+|   +----+    |
+|             |
+|             |
 +-------------+
 INPUT
       @grid = Textgrid.new(@input)
