@@ -8,11 +8,54 @@ module Sketchdown
     end
 
     def parse
-      for e in @grid.cells
+      parse_cells(@grid.cells)
+    end
+
+    # Parse the specified cells recursivly
+    #
+    # cells - the cells to parse
+    def parse_cells(cells)
+      figures = []
+      rectangles = get_rectangles(cells)
+
+      for e in rectangles
+        figures.push(e)
+
+        cells = e.get_cells_inside
+        if cells != nil
+          sub = parse_cells(e.get_cells_inside)
+          figures.concat(sub)
+        end
+      end
+
+      figures
+    end
+
+    # Returns all the rectangles of the given array of cells
+    # Note that this method only returns the root rectangles 
+    # of the spcified scope.
+    # 
+    # Example:
+    #    +--------------+          +--------------+
+    #    | +---+  +---+ |          |              |
+    #    | |   |  |   | | returns  |              |
+    #    | +---+  +---+ |          |              |
+    #    +--------------+          +--------------+
+    #
+    # cells - the array of cells
+    #
+    # Returns an array of rectangles or an emtpy array
+    def get_rectangles(cells)
+      rectangles = []
+      for e in cells
+        next if in_rectangle(e, rectangles)
+
         if e.figure == [:corner, :north_west]
-          get_rectangle(e)
+          rectangle = get_rectangle(e)
+          rectangles.push(rectangle) if rectangle != nil
         end 
       end
+      rectangles
     end
 
     # Returns the rectangle for the corresponding start cell.
@@ -28,8 +71,9 @@ module Sketchdown
       sw_nw = find_corner_nw(se_sw[-1])
 
       if nw == sw_nw[-1]
-        populate_rectangle(nw_ne,ne_se,se_sw,sw_nw)
+        return populate_rectangle(nw_ne,ne_se,se_sw,sw_nw)
       end
+      nil 
     end
 
     def find_corner_ne(nw)
@@ -117,7 +161,38 @@ module Sketchdown
       y = nw_ne[0].y
       width = nw_ne[-1].x-x
       height = ne_se[-1].y-y
-      Rectangle.new(x,y,width,height)
+      rectangle = Rectangle.new(x,y,width,height)
+
+      # populate the cells of the rectangle
+      rectangle.cells = Array.new
+      j = rectangle.y
+      while j <= height
+        k = rectangle.x
+        while k <= width
+          rectangle.cells.push(@grid.get(k,j))
+          k+=1
+        end
+        j+=1
+      end
+      rectangle
+    end
+
+    # Checks if the specified cell is in one of the given 
+    # rectangles
+    #
+    # cell - the cell to check
+    # rectangles - the rectangles as an array of elements
+    #
+    # Returns true if the cell is in one of the rectangles
+    # or false
+    def in_rectangle(cell, rectangles)
+      return false if cell == nil
+      for e in rectangles
+        if e.include?(cell.x, cell.y)
+          return true
+        end
+      end
+      false
     end
 
   end

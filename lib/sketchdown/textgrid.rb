@@ -46,7 +46,7 @@ module Sketchdown
       }
     }
 
-    def initialize(input)
+    def initialize(input, options = {})
       @input = input.chomp
       @width = calc_width(input)
       @height = calc_height(input)

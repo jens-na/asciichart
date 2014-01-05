@@ -4,34 +4,31 @@ module Sketchdown
 
     class Base
 
-      def initialize
+      attr_reader :width
+      attr_reader :height
 
+      def initialize(width, height, options = {})
+        @width = width
+        @height = height
       end
 
-      def render
-
+      def render(figure)
+        case figure.type
+        when :rectangle
+          render_rectangle(figure)
+        when :line
+          render_line(figure)
+        end
       end
 
-      def render_size(width, height)
-
-      end
-
-      def render_rectangle(x, y, width, height)
+      def render_rectangle(rectangle)
         raise NotImplementedError
       end
 
-      def render_line(x1, y1, x2, y2)
+      def render_line(line)
         raise NotImplementedError
       end
 
-      def render_arrow(x, y, type)
-        raise NotImplementedError
-      end
-
-      def render_corner(x, y, type)
-        raise NotImplementedError
-      end
-      
     end
   end
 end

@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{render ascii charts}
   s.description = %q{render ascii art charts to images}
 
-  s.add_runtime_dependency("launchy")
+  s.add_runtime_dependency("chunky_png", "~> 1.2.9")
   s.add_development_dependency("rspec", "~>2.14.1")
   s.add_development_dependency('rake', "~> 10.1.1")
   s.add_development_dependency('cucumber', "~> 1.3.10")

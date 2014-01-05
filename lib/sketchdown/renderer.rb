@@ -2,7 +2,7 @@ module Sketchdown
 
   module Renderer
 
-    autoload :Base, 'sketchdown/renderer/base'
+    autoload :Png, 'sketchdown/renderer/png'
 
   end
 end 

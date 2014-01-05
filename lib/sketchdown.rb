@@ -10,7 +10,6 @@ def require_all(path)
   end
 end
 
-# stdlib
 
 # internal
 require 'sketchdown/textgrid'
@@ -19,4 +18,6 @@ require 'sketchdown/textcell'
 require 'sketchdown/document'
 require 'sketchdown/renderer'
 require 'sketchdown/options'
+require 'sketchdown/figures/figure'
 require 'sketchdown/figures/rectangle'
+require 'sketchdown/renderer/base'
