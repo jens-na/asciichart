@@ -5,9 +5,9 @@ class TestGridParser < Test::Unit::TestCase
   context "A gridparser" do
     setup do
       @input = <<INPUT
-+-------------+         +---------+
-|             | <------ | Test    |
-|  +----+     |         +---------+
++-------------+     +---------+
+|             | <-- | Test    |
+|  +----+     |     +---------+
 |  |    |     |
 |  |    |     |
 |  +----+     |

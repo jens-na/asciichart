@@ -1,5 +1,3 @@
-require 'chunky_png'
-
 module Sketchdown
 
   module Renderer
@@ -8,7 +6,9 @@ module Sketchdown
 
       def initialize(width, height, options = {})
         super
-        @png = ChunkyPNG::Image.new(width, height, ChunkyPNG::Color::TRANSPARENT)
+        @sx = options['scale_x']
+        @sy = options['scale_y']
+        bg = options['bgcolor']
       end
 
       def render_rectangle(rectangle)
@@ -16,6 +16,10 @@ module Sketchdown
 
       def render_line(line)
       end
+
+      def render_finish
+      end
+
     end
   end
 end

@@ -5,23 +5,27 @@ class TestDocument < Test::Unit::TestCase
   context "A document" do
     setup do
       @input = <<INPUT
-+-------------+         +---------+
-|             | <------ | Test    |
-|  +----+     |         +---------+
-|  |    |     |
-|  |    |     |
-|  +----+     |
-|     |       |
-|     +--+    |
-|        |    |
-| +---+  |    |
-| |   |--+    |
-| +---+       |
-|             |
-+-------------+
++----------+  +----------+
+| Test     |  | Test     |
+|          |  |          |
+|          |  |          |
++----------+  +----------+
+
++----------+  +----------+
+| Test     |  | Test     |
+|          |  |          |
+|          |  |          |
++----------+  +----------+
+
++----------+  +----------+
+| Test     |  | Test     |
+|          |  |          |
+|          |  |          |
++----------+  +----------+
 INPUT
+
       @document = Document.new(@input)
-      @document.to_png
+      obj = @document.to_png
     end
 
     context "document parsed" do

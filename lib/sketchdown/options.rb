@@ -2,44 +2,18 @@ module Sketchdown
 
   class Options < Hash
 
-    OPTIONS = {
+    DEFAULTS = {
 
-      # the default renderer to use
-      'renderer' => 'png',
+      'scale_x' => 15, 
+      'scale_y' => 25,
+      'bgcolor' => '#ffffff',
 
-      #...other basic options...
-    }
-
-    RENDERING_HINTS = {
-
-      # the line style, which may be
-      # :solid, :dashed
-      :linestyle => :solid,
-
-      # the corner style which may be
-      # :edged, :rounded
-      :corners => :edged,
-
-      # the default color for the background
-      :bgcolor => '#000000',
-
-      # the default color for the painintg (lines,
-      # rectangles, etc)
-      :fgcolor => '#ffffff',
-
-      # the color for the text
-      :textcolor => '#ffffff'
-
-      # ...other default options...
-    }
-
-    RENDERER_OPTIONS = {
-    
-      'png' => {
-        
+      'rendering_hints' => {
+        'linestyle'           => 'solid',
+        'corners'             => 'edged',
+        'fgcolor'             => '#000000',
+        'textcolor'           => '#000000'
       }
-
-      # ...other renderer...
     }
 
   end
